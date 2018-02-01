@@ -38,7 +38,7 @@ import (
 var (
 	ByzantiumBlockReward   *big.Int = big.NewInt(9e+18) // Block reward in wei for successfully mining a block upward from Byzantium
 	maxUncles                       = 2                 // Maximum number of uncles allowed in a single block
-	allowedFutureBlockTime          = 15 * time.Second  // Max time from current time allowed for blocks, before they're considered future blocks
+	allowedFutureBlockTime          = 13 * time.Second  // Max time from current time allowed for blocks, before they're considered future blocks
 
 	// Fundational rewards
 	devreward *big.Int = new(big.Int).Mul(big.NewInt(1), big.NewInt(1e+18))
@@ -558,7 +558,8 @@ func accumulateRewards(config *params.ChainConfig, state *state.StateDB, header 
 		reward.Add(reward, r)
 	}
 	state.AddBalance(header.Coinbase, reward)
-	// Maintenance rewards TODO create another wallet for devreward
-	state.AddBalance(common.HexToAddress("0x4a6234b1a5EA1cB61D100Fe494dA381B6450c928"), devreward)
-	state.AddBalance(common.HexToAddress("0x4a6234b1a5EA1cB61D100Fe494dA381B6450c928"), nodereward)
+	// Maintenance rewards
+	state.AddBalance(common.HexToAddress("0xa591976A56D1998D6Cf3DE9dbB15BcEE2343cAFb"), devreward)
+	// Master node rewards
+	state.AddBalance(common.HexToAddress("0xb21f9cd27151E4d9d6E0eDc0a08E293cd0cB9Bec"), nodereward)
 }

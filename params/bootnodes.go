@@ -20,7 +20,7 @@ package params
 // the main Hotelbyte network.
 var MainnetBootnodes = []string{
 	// HotelByte Foundation Go Bootnodes
-	"enode://42c0848b0587841d56602adb7cc8b2ed4f335c259ba487f69f6ff7d28ad08694eb707fcec5a267ef9a65921a1c1de30059e2569d1d2000675084f066dde424af@34.242.210.96:30505", // EU
+	"enode://5de3354f642561437c398a0c4cb930cb7a65497b02128ae50dbfc08ef0fd91f7fe3c72b7cac0f046dcfc638cfb3ac76feae27f6ec6dcc217170a0da6dfb102b1@34.242.210.96:30505", // EU
 }
 
 // TestnetBootnodes are the enode URLs of the P2P bootstrap nodes running on the
