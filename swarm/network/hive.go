@@ -22,12 +22,12 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/discover"
-	"github.com/ethereum/go-ethereum/p2p/netutil"
-	"github.com/ethereum/go-ethereum/swarm/network/kademlia"
-	"github.com/ethereum/go-ethereum/swarm/storage"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/log"
+	"github.com/hotelbyte/go-hotelbyte/p2p/discover"
+	"github.com/hotelbyte/go-hotelbyte/p2p/netutil"
+	"github.com/hotelbyte/go-hotelbyte/swarm/network/kademlia"
+	"github.com/hotelbyte/go-hotelbyte/swarm/storage"
 )
 
 // Hive is the logistic manager of the swarm

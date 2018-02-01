@@ -21,12 +21,12 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/core/state"
+	"github.com/hotelbyte/go-hotelbyte/core/vm"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
+	"github.com/hotelbyte/go-hotelbyte/ethdb"
+	"github.com/hotelbyte/go-hotelbyte/params"
 )
 
 // Config is a basic type specifying certain configuration flags for running
@@ -53,7 +53,7 @@ type Config struct {
 func setDefaults(cfg *Config) {
 	if cfg.ChainConfig == nil {
 		cfg.ChainConfig = &params.ChainConfig{
-			ChainId:        big.NewInt(1),
+			ChainId:        big.NewInt(301333),
 			HomesteadBlock: new(big.Int),
 			DAOForkBlock:   new(big.Int),
 			DAOForkSupport: false,

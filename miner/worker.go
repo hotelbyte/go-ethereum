@@ -24,17 +24,17 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/consensus/misc"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/consensus"
+	"github.com/hotelbyte/go-hotelbyte/consensus/misc"
+	"github.com/hotelbyte/go-hotelbyte/core"
+	"github.com/hotelbyte/go-hotelbyte/core/state"
+	"github.com/hotelbyte/go-hotelbyte/core/types"
+	"github.com/hotelbyte/go-hotelbyte/core/vm"
+	"github.com/hotelbyte/go-hotelbyte/ethdb"
+	"github.com/hotelbyte/go-hotelbyte/event"
+	"github.com/hotelbyte/go-hotelbyte/log"
+	"github.com/hotelbyte/go-hotelbyte/params"
 	"gopkg.in/fatih/set.v0"
 )
 
@@ -512,6 +512,11 @@ func (env *Work) commitTransactions(mux *event.TypeMux, txs *types.TransactionsB
 	var coalescedLogs []*types.Log
 
 	for {
+		// If we don't have enough gas for any further transactions then we're done
+		if gp.Gas() < params.TxGas {
+			log.Trace("Not enough gas for further transactions", "gp", gp)
+			break
+		}
 		// Retrieve the next transaction and abort if all done
 		tx := txs.Peek()
 		if tx == nil {

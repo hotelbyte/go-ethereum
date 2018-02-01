@@ -17,14 +17,14 @@
 package core
 
 import (
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/consensus/misc"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/consensus"
+	"github.com/hotelbyte/go-hotelbyte/consensus/misc"
+	"github.com/hotelbyte/go-hotelbyte/core/state"
+	"github.com/hotelbyte/go-hotelbyte/core/types"
+	"github.com/hotelbyte/go-hotelbyte/core/vm"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
+	"github.com/hotelbyte/go-hotelbyte/params"
 )
 
 // StateProcessor is a basic Processor, which takes care of transitioning
@@ -46,7 +46,7 @@ func NewStateProcessor(config *params.ChainConfig, bc *BlockChain, engine consen
 	}
 }
 
-// Process processes the state changes according to the Ethereum rules by running
+// Process processes the state changes according to the Hotelbyte rules by running
 // the transaction messages using the statedb and applying any rewards to both
 // the processor (coinbase) and any included uncles.
 //

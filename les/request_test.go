@@ -21,12 +21,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/light"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/core"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
+	"github.com/hotelbyte/go-hotelbyte/eth"
+	"github.com/hotelbyte/go-hotelbyte/ethdb"
+	"github.com/hotelbyte/go-hotelbyte/light"
 )
 
 var testBankSecureTrieKey = secAddr(testBankAddress)

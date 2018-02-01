@@ -16,7 +16,7 @@
 
 // Contains all the wrappers from the common package.
 
-package geth
+package ghbc
 
 import (
 	"encoding/hex"
@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/hotelbyte/go-hotelbyte/common"
 )
 
 // Hash represents the 32 byte Keccak256 hash of arbitrary data.
@@ -128,7 +128,7 @@ func (h *Hashes) Append(hash *Hash) {
 	h.hashes = append(h.hashes, hash.hash)
 }
 
-// Address represents the 20 byte address of an Ethereum account.
+// Address represents the 20 byte address of an Hotelbyte account.
 type Address struct {
 	address common.Address
 }

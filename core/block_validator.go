@@ -19,10 +19,10 @@ package core
 import (
 	"fmt"
 
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/hotelbyte/go-hotelbyte/consensus"
+	"github.com/hotelbyte/go-hotelbyte/core/state"
+	"github.com/hotelbyte/go-hotelbyte/core/types"
+	"github.com/hotelbyte/go-hotelbyte/params"
 )
 
 // BlockValidator is responsible for validating block headers, uncles and

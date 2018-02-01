@@ -25,14 +25,14 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/accounts/usbwallet"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/discover"
+	"github.com/hotelbyte/go-hotelbyte/accounts"
+	"github.com/hotelbyte/go-hotelbyte/accounts/keystore"
+	"github.com/hotelbyte/go-hotelbyte/accounts/usbwallet"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
+	"github.com/hotelbyte/go-hotelbyte/log"
+	"github.com/hotelbyte/go-hotelbyte/p2p"
+	"github.com/hotelbyte/go-hotelbyte/p2p/discover"
 )
 
 const (
@@ -48,7 +48,7 @@ const (
 // all registered services.
 type Config struct {
 	// Name sets the instance name of the node. It must not contain the / character and is
-	// used in the devp2p node identifier. The instance name of geth is "geth". If no
+	// used in the devp2p node identifier. The instance name of ghbc is "ghbc". If no
 	// value is specified, the basename of the current executable is used.
 	Name string `toml:"-"`
 
@@ -218,9 +218,9 @@ func DefaultWSEndpoint() string {
 // NodeName returns the devp2p node identifier.
 func (c *Config) NodeName() string {
 	name := c.name()
-	// Backwards compatibility: previous versions used title-cased "Geth", keep that.
-	if name == "geth" || name == "geth-testnet" {
-		name = "Geth"
+	// Backwards compatibility: previous versions used title-cased "Ghbc", keep that.
+	if name == "ghbc" || name == "ghbc-testnet" {
+		name = "Ghbc"
 	}
 	if c.UserIdent != "" {
 		name += "/" + c.UserIdent
@@ -244,8 +244,8 @@ func (c *Config) name() string {
 	return c.Name
 }
 
-// These resources are resolved differently for "geth" instances.
-var isOldGethResource = map[string]bool{
+// These resources are resolved differently for "ghbc" instances.
+var isOldGhbcResource = map[string]bool{
 	"chaindata":          true,
 	"nodes":              true,
 	"nodekey":            true,
@@ -262,10 +262,10 @@ func (c *Config) resolvePath(path string) string {
 		return ""
 	}
 	// Backwards-compatibility: ensure that data directory files created
-	// by geth 1.4 are used if they exist.
-	if c.name() == "geth" && isOldGethResource[path] {
+	// by ghbc 1.4 are used if they exist.
+	if c.name() == "ghbc" && isOldGhbcResource[path] {
 		oldpath := ""
-		if c.Name == "geth" {
+		if c.Name == "ghbc" {
 			oldpath = filepath.Join(c.DataDir, path)
 		}
 		if oldpath != "" && common.FileExist(oldpath) {
@@ -396,7 +396,7 @@ func makeAccountManager(conf *Config) (*accounts.Manager, string, error) {
 	var ephemeral string
 	if keydir == "" {
 		// There is no datadir.
-		keydir, err = ioutil.TempDir("", "go-ethereum-keystore")
+		keydir, err = ioutil.TempDir("", "go-hotelbyte-keystore")
 		ephemeral = keydir
 	}
 

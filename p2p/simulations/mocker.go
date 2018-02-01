@@ -24,8 +24,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/discover"
+	"github.com/hotelbyte/go-hotelbyte/log"
+	"github.com/hotelbyte/go-hotelbyte/p2p/discover"
 )
 
 //a map of mocker names to its function

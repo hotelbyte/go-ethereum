@@ -20,7 +20,7 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/hotelbyte/go-hotelbyte/common"
 )
 
 /*
@@ -122,4 +122,9 @@ func (b *memBatch) Write() error {
 
 func (b *memBatch) ValueSize() int {
 	return b.size
+}
+
+func (b *memBatch) Reset() {
+	b.writes = b.writes[:0]
+	b.size = 0
 }

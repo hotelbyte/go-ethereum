@@ -21,9 +21,9 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto/sha3"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/crypto/sha3"
+	"github.com/hotelbyte/go-hotelbyte/log"
 	"github.com/rcrowley/go-metrics"
 )
 
@@ -501,5 +501,6 @@ func (t *Trie) hashRoot(db DatabaseWriter) (node, node, error) {
 		return hashNode(emptyRoot.Bytes()), nil, nil
 	}
 	h := newHasher(t.cachegen, t.cachelimit)
+	defer returnHasherToPool(h)
 	return h.hash(t.root, db, true)
 }

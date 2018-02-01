@@ -19,8 +19,8 @@ package trie
 import (
 	"fmt"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/log"
 )
 
 var secureKeyPrefix = []byte("secure-key-")
@@ -199,10 +199,10 @@ func (t *SecureTrie) secKey(key []byte) []byte {
 // invalid on the next call to hashKey or secKey.
 func (t *SecureTrie) hashKey(key []byte) []byte {
 	h := newHasher(0, 0)
-	calculator := h.newCalculator()
-	calculator.sha.Write(key)
-	buf := calculator.sha.Sum(t.hashKeyBuf[:0])
-	h.returnCalculator(calculator)
+	h.sha.Reset()
+	h.sha.Write(key)
+	buf := h.sha.Sum(t.hashKeyBuf[:0])
+	returnHasherToPool(h)
 	return buf
 }
 

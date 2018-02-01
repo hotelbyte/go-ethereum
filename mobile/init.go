@@ -16,13 +16,13 @@
 
 // Contains initialization code for the mbile library.
 
-package geth
+package ghbc
 
 import (
 	"os"
 	"runtime"
 
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/hotelbyte/go-hotelbyte/log"
 )
 
 func init() {

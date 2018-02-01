@@ -17,12 +17,12 @@
 // Contains all the wrappers from the accounts package to support client side enode
 // management on mobile platforms.
 
-package geth
+package ghbc
 
 import (
 	"errors"
 
-	"github.com/ethereum/go-ethereum/p2p/discv5"
+	"github.com/hotelbyte/go-hotelbyte/p2p/discv5"
 )
 
 // Enode represents a host on the network.
@@ -49,10 +49,10 @@ type Enode struct {
 // query parameter "discport".
 //
 // In the following example, the node URL describes
-// a node with IP address 10.3.58.6, TCP listening port 30303
-// and UDP discovery port 30301.
+// a node with IP address 10.3.58.6, TCP listening port 30505
+// and UDP discovery port 30505.
 //
-//    enode://<hex node id>@10.3.58.6:30303?discport=30301
+//    enode://<hex node id>@10.3.58.6:30506?discport=30505
 func NewEnode(rawurl string) (enode *Enode, _ error) {
 	node, err := discv5.ParseNode(rawurl)
 	if err != nil {

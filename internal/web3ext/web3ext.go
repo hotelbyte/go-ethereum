@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
 
-// package web3ext contains geth specific web3.js extensions.
+// package web3ext contains ghbc specific web3.js extensions.
 package web3ext
 
 var Modules = map[string]string{
@@ -516,6 +516,12 @@ web3._extend({
 			name: 'deriveAccount',
 			call: 'personal_deriveAccount',
 			params: 3
+		}),
+		new web3._extend.Method({
+			name: 'signTransaction',
+			call: 'personal_signTransaction',
+			params: 2,
+			inputFormatter: [web3._extend.formatters.inputTransactionFormatter, null]
 		}),
 	],
 	properties: [

@@ -22,13 +22,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/crypto/ecies"
-	"github.com/ethereum/go-ethereum/event/filter"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
+	"github.com/hotelbyte/go-hotelbyte/crypto/ecies"
+	"github.com/hotelbyte/go-hotelbyte/event/filter"
+	"github.com/hotelbyte/go-hotelbyte/log"
+	"github.com/hotelbyte/go-hotelbyte/p2p"
+	"github.com/hotelbyte/go-hotelbyte/rpc"
 
 	"gopkg.in/fatih/set.v0"
 )
@@ -58,7 +58,7 @@ type MessageEvent struct {
 	Message *Message
 }
 
-// Whisper represents a dark communication interface through the Ethereum
+// Whisper represents a dark communication interface through the Hotelbyte
 // network, using its very own P2P communication layer.
 type Whisper struct {
 	protocol p2p.Protocol
@@ -76,7 +76,7 @@ type Whisper struct {
 	quit chan struct{}
 }
 
-// New creates a Whisper client ready to communicate through the Ethereum P2P
+// New creates a Whisper client ready to communicate through the Hotelbyte P2P
 // network.
 func New() *Whisper {
 	whisper := &Whisper{

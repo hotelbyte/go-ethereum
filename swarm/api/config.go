@@ -22,14 +22,14 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/contracts/ens"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/swarm/network"
-	"github.com/ethereum/go-ethereum/swarm/services/swap"
-	"github.com/ethereum/go-ethereum/swarm/storage"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/contracts/ens"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
+	"github.com/hotelbyte/go-hotelbyte/log"
+	"github.com/hotelbyte/go-hotelbyte/node"
+	"github.com/hotelbyte/go-hotelbyte/swarm/network"
+	"github.com/hotelbyte/go-hotelbyte/swarm/services/swap"
+	"github.com/hotelbyte/go-hotelbyte/swarm/storage"
 )
 
 const (
@@ -75,7 +75,7 @@ func NewDefaultConfig() (self *Config) {
 		ListenAddr:    DefaultHTTPListenAddr,
 		Port:          DefaultHTTPPort,
 		Path:          node.DefaultDataDir(),
-		EnsApi:        node.DefaultIPCEndpoint("geth"),
+		EnsApi:        node.DefaultIPCEndpoint("ghbc"),
 		EnsRoot:       ens.TestNetAddress,
 		NetworkId:     network.NetworkId,
 		SwapEnabled:   false,

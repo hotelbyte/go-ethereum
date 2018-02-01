@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
 
-// Package rle implements the run-length encoding used for Ethereum data.
+// Package rle implements the run-length encoding used for Hotelbyte data.
 package rle
 
 import (
 	"bytes"
 	"errors"
 
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
 )
 
 const (

@@ -27,13 +27,13 @@ import (
 	"time"
 
 	"github.com/docker/docker/pkg/reexec"
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/internal/cmdtest"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/ethereum/go-ethereum/swarm"
+	"github.com/hotelbyte/go-hotelbyte/accounts"
+	"github.com/hotelbyte/go-hotelbyte/accounts/keystore"
+	"github.com/hotelbyte/go-hotelbyte/internal/cmdtest"
+	"github.com/hotelbyte/go-hotelbyte/node"
+	"github.com/hotelbyte/go-hotelbyte/p2p"
+	"github.com/hotelbyte/go-hotelbyte/rpc"
+	"github.com/hotelbyte/go-hotelbyte/swarm"
 )
 
 func init() {

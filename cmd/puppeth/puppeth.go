@@ -22,7 +22,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/hotelbyte/go-hotelbyte/log"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -30,7 +30,7 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.Name = "puppeth"
-	app.Usage = "assemble and maintain private Ethereum networks"
+	app.Usage = "assemble and maintain private Hotelbyte networks"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "network",

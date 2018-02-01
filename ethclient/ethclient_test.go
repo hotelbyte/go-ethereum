@@ -16,19 +16,19 @@
 
 package ethclient
 
-import "github.com/ethereum/go-ethereum"
+import "github.com/hotelbyte/go-hotelbyte"
 
-// Verify that Client implements the ethereum interfaces.
+// Verify that Client implements the hotelbyte interfaces.
 var (
-	_ = ethereum.ChainReader(&Client{})
-	_ = ethereum.TransactionReader(&Client{})
-	_ = ethereum.ChainStateReader(&Client{})
-	_ = ethereum.ChainSyncReader(&Client{})
-	_ = ethereum.ContractCaller(&Client{})
-	_ = ethereum.GasEstimator(&Client{})
-	_ = ethereum.GasPricer(&Client{})
-	_ = ethereum.LogFilterer(&Client{})
-	_ = ethereum.PendingStateReader(&Client{})
-	// _ = ethereum.PendingStateEventer(&Client{})
-	_ = ethereum.PendingContractCaller(&Client{})
+	_ = hotelbyte.ChainReader(&Client{})
+	_ = hotelbyte.TransactionReader(&Client{})
+	_ = hotelbyte.ChainStateReader(&Client{})
+	_ = hotelbyte.ChainSyncReader(&Client{})
+	_ = hotelbyte.ContractCaller(&Client{})
+	_ = hotelbyte.GasEstimator(&Client{})
+	_ = hotelbyte.GasPricer(&Client{})
+	_ = hotelbyte.LogFilterer(&Client{})
+	_ = hotelbyte.PendingStateReader(&Client{})
+	// _ = hotelbyte.PendingStateEventer(&Client{})
+	_ = hotelbyte.PendingContractCaller(&Client{})
 )

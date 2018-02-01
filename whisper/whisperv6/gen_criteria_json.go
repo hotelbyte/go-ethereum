@@ -5,11 +5,12 @@ package whisperv6
 import (
 	"encoding/json"
 
-	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/hotelbyte/go-hotelbyte/common/hexutil"
 )
 
 var _ = (*criteriaOverride)(nil)
 
+// MarshalJSON marshals type Criteria to a json string
 func (c Criteria) MarshalJSON() ([]byte, error) {
 	type Criteria struct {
 		SymKeyID     string        `json:"symKeyID"`
@@ -29,6 +30,7 @@ func (c Criteria) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&enc)
 }
 
+// UnmarshalJSON unmarshals type Criteria to a json string
 func (c *Criteria) UnmarshalJSON(input []byte) error {
 	type Criteria struct {
 		SymKeyID     *string        `json:"symKeyID"`

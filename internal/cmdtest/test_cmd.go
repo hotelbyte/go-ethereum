@@ -25,6 +25,7 @@ import (
 	"os"
 	"os/exec"
 	"regexp"
+	"strings"
 	"sync"
 	"testing"
 	"text/template"
@@ -52,7 +53,7 @@ type TestCmd struct {
 }
 
 // Run exec's the current binary using name as argv[0] which will trigger the
-// reexec init function for that name (e.g. "geth-test" in cmd/geth/run_test.go)
+// reexec init function for that name (e.g. "ghbc-test" in cmd/ghbc/run_test.go)
 func (tt *TestCmd) Run(name string, args ...string) {
 	tt.stderr = &testlogger{t: tt.T}
 	tt.cmd = &exec.Cmd{
@@ -76,7 +77,7 @@ func (tt *TestCmd) Run(name string, args ...string) {
 // InputLine writes the given text to the childs stdin.
 // This method can also be called from an expect template, e.g.:
 //
-//     geth.expect(`Passphrase: {{.InputLine "password"}}`)
+//     ghbc.expect(`Passphrase: {{.InputLine "password"}}`)
 func (tt *TestCmd) InputLine(s string) string {
 	io.WriteString(tt.stdin, s+"\n")
 	return ""
@@ -141,9 +142,10 @@ func (tt *TestCmd) matchExactOutput(want []byte) error {
 // Note that an arbitrary amount of output may be consumed by the
 // regular expression. This usually means that expect cannot be used
 // after ExpectRegexp.
-func (tt *TestCmd) ExpectRegexp(resource string) (*regexp.Regexp, []string) {
+func (tt *TestCmd) ExpectRegexp(regex string) (*regexp.Regexp, []string) {
+	regex = strings.TrimPrefix(regex, "\n")
 	var (
-		re      = regexp.MustCompile(resource)
+		re      = regexp.MustCompile(regex)
 		rtee    = &runeTee{in: tt.stdout}
 		matches []int
 	)
@@ -151,7 +153,7 @@ func (tt *TestCmd) ExpectRegexp(resource string) (*regexp.Regexp, []string) {
 	output := rtee.buf.Bytes()
 	if matches == nil {
 		tt.Fatalf("Output did not match:\n---------------- (stdout text)\n%s\n---------------- (regular expression)\n%s",
-			output, resource)
+			output, regex)
 		return re, nil
 	}
 	tt.Logf("Matched stdout text:\n%s", output)

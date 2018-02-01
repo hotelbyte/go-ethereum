@@ -34,16 +34,16 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/console"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/discover"
-	"github.com/ethereum/go-ethereum/p2p/nat"
-	"github.com/ethereum/go-ethereum/whisper/mailserver"
-	whisper "github.com/ethereum/go-ethereum/whisper/whisperv5"
+	"github.com/hotelbyte/go-hotelbyte/cmd/utils"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/console"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
+	"github.com/hotelbyte/go-hotelbyte/log"
+	"github.com/hotelbyte/go-hotelbyte/p2p"
+	"github.com/hotelbyte/go-hotelbyte/p2p/discover"
+	"github.com/hotelbyte/go-hotelbyte/p2p/nat"
+	"github.com/hotelbyte/go-hotelbyte/whisper/mailserver"
+	whisper "github.com/hotelbyte/go-hotelbyte/whisper/whisperv5"
 	"golang.org/x/crypto/pbkdf2"
 )
 
@@ -91,7 +91,7 @@ var (
 	argPoW       = flag.Float64("pow", whisper.DefaultMinimumPoW, "PoW for normal messages in float format (e.g. 2.7)")
 	argServerPoW = flag.Float64("mspow", whisper.DefaultMinimumPoW, "PoW requirement for Mail Server request")
 
-	argIP      = flag.String("ip", "", "IP address and port of this node (e.g. 127.0.0.1:30303)")
+	argIP      = flag.String("ip", "", "IP address and port of this node (e.g. 127.0.0.1:30505)")
 	argPub     = flag.String("pub", "", "public key for asymmetric encryption")
 	argDBPath  = flag.String("dbpath", "", "path to the server's DB directory")
 	argIDFile  = flag.String("idfile", "", "file name with node id (private key)")
@@ -601,7 +601,7 @@ func requestExpiredMessagesLoop() {
 	if err != nil {
 		utils.Fatalf("Failed to save symmetric key for mail request: %s", err)
 	}
-	peerID = extractIdFromEnode(*argEnode)
+	peerID = extractIDFromEnode(*argEnode)
 	shh.AllowP2PMessagesFromPeer(peerID)
 
 	for {
@@ -652,7 +652,7 @@ func requestExpiredMessagesLoop() {
 	}
 }
 
-func extractIdFromEnode(s string) []byte {
+func extractIDFromEnode(s string) []byte {
 	n, err := discover.ParseNode(s)
 	if err != nil {
 		utils.Fatalf("Failed to parse enode: %s", err)

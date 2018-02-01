@@ -26,11 +26,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
+	"github.com/hotelbyte/go-hotelbyte/log"
+	"github.com/hotelbyte/go-hotelbyte/p2p"
+	"github.com/hotelbyte/go-hotelbyte/rpc"
 	"github.com/syndtr/goleveldb/leveldb/errors"
 	"golang.org/x/crypto/pbkdf2"
 	"golang.org/x/sync/syncmap"
@@ -51,7 +51,7 @@ const (
 	overflowIdx   = iota // Indicator of message queue overflow
 )
 
-// Whisper represents a dark communication interface through the Ethereum
+// Whisper represents a dark communication interface through the Hotelbyte
 // network, using its very own P2P communication layer.
 type Whisper struct {
 	protocol p2p.Protocol // Protocol description and parameters
@@ -80,7 +80,7 @@ type Whisper struct {
 	mailServer MailServer // MailServer interface
 }
 
-// New creates a Whisper client ready to communicate through the Ethereum P2P network.
+// New creates a Whisper client ready to communicate through the Hotelbyte P2P network.
 func New(cfg *Config) *Whisper {
 	if cfg == nil {
 		cfg = &DefaultConfig

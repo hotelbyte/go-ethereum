@@ -21,9 +21,9 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/hotelbyte/go-hotelbyte"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/core/types"
 )
 
 var (
@@ -47,15 +47,9 @@ type ContractCaller interface {
 	// CodeAt returns the code of the given account. This is needed to differentiate
 	// between contract internal errors and the local chain being out of sync.
 	CodeAt(ctx context.Context, contract common.Address, blockNumber *big.Int) ([]byte, error)
-	// ContractCall executes an Ethereum contract call with the specified data as the
+	// ContractCall executes an Hotelbyte contract call with the specified data as the
 	// input.
-	CallContract(ctx context.Context, call ethereum.CallMsg, blockNumber *big.Int) ([]byte, error)
-}
-
-// DeployBackend wraps the operations needed by WaitMined and WaitDeployed.
-type DeployBackend interface {
-	TransactionReceipt(ctx context.Context, txHash common.Hash) (*types.Receipt, error)
-	CodeAt(ctx context.Context, account common.Address, blockNumber *big.Int) ([]byte, error)
+	CallContract(ctx context.Context, call hotelbyte.CallMsg, blockNumber *big.Int) ([]byte, error)
 }
 
 // PendingContractCaller defines methods to perform contract calls on the pending state.
@@ -64,8 +58,8 @@ type DeployBackend interface {
 type PendingContractCaller interface {
 	// PendingCodeAt returns the code of the given account in the pending state.
 	PendingCodeAt(ctx context.Context, contract common.Address) ([]byte, error)
-	// PendingCallContract executes an Ethereum contract call against the pending state.
-	PendingCallContract(ctx context.Context, call ethereum.CallMsg) ([]byte, error)
+	// PendingCallContract executes an Hotelbyte contract call against the pending state.
+	PendingCallContract(ctx context.Context, call hotelbyte.CallMsg) ([]byte, error)
 }
 
 // ContractTransactor defines the methods needed to allow operating with contract
@@ -85,13 +79,34 @@ type ContractTransactor interface {
 	// There is no guarantee that this is the true gas limit requirement as other
 	// transactions may be added or removed by miners, but it should provide a basis
 	// for setting a reasonable default.
-	EstimateGas(ctx context.Context, call ethereum.CallMsg) (gas uint64, err error)
+	EstimateGas(ctx context.Context, call hotelbyte.CallMsg) (gas uint64, err error)
 	// SendTransaction injects the transaction into the pending pool for execution.
 	SendTransaction(ctx context.Context, tx *types.Transaction) error
+}
+
+// ContractFilterer defines the methods needed to access log events using one-off
+// queries or continuous event subscriptions.
+type ContractFilterer interface {
+	// FilterLogs executes a log filter operation, blocking during execution and
+	// returning all the results in one batch.
+	//
+	// TODO(karalabe): Deprecate when the subscription one can return past data too.
+	FilterLogs(ctx context.Context, query hotelbyte.FilterQuery) ([]types.Log, error)
+
+	// SubscribeFilterLogs creates a background log filtering operation, returning
+	// a subscription immediately, which can be used to stream the found events.
+	SubscribeFilterLogs(ctx context.Context, query hotelbyte.FilterQuery, ch chan<- types.Log) (hotelbyte.Subscription, error)
+}
+
+// DeployBackend wraps the operations needed by WaitMined and WaitDeployed.
+type DeployBackend interface {
+	TransactionReceipt(ctx context.Context, txHash common.Hash) (*types.Receipt, error)
+	CodeAt(ctx context.Context, account common.Address, blockNumber *big.Int) ([]byte, error)
 }
 
 // ContractBackend defines the methods needed to work with contracts on a read-write basis.
 type ContractBackend interface {
 	ContractCaller
 	ContractTransactor
+	ContractFilterer
 }

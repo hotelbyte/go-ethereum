@@ -5,11 +5,12 @@ package whisperv6
 import (
 	"encoding/json"
 
-	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/hotelbyte/go-hotelbyte/common/hexutil"
 )
 
 var _ = (*messageOverride)(nil)
 
+// MarshalJSON marshals type Message to a json string
 func (m Message) MarshalJSON() ([]byte, error) {
 	type Message struct {
 		Sig       hexutil.Bytes `json:"sig,omitempty"`
@@ -35,6 +36,7 @@ func (m Message) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&enc)
 }
 
+// UnmarshalJSON unmarshals type Message to a json string
 func (m *Message) UnmarshalJSON(input []byte) error {
 	type Message struct {
 		Sig       *hexutil.Bytes `json:"sig,omitempty"`

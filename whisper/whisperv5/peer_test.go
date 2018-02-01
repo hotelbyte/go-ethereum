@@ -25,11 +25,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/discover"
-	"github.com/ethereum/go-ethereum/p2p/nat"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
+	"github.com/hotelbyte/go-hotelbyte/p2p"
+	"github.com/hotelbyte/go-hotelbyte/p2p/discover"
+	"github.com/hotelbyte/go-hotelbyte/p2p/nat"
 )
 
 var keys []string = []string{
@@ -109,7 +109,7 @@ func TestSimulation(t *testing.T) {
 func initialize(t *testing.T) {
 	var err error
 	ip := net.IPv4(127, 0, 0, 1)
-	port0 := 30303
+	port0 := 30505
 
 	for i := 0; i < NumNodes; i++ {
 		var node TestNode
@@ -129,7 +129,7 @@ func initialize(t *testing.T) {
 			t.Fatalf("failed convert the key: %s.", keys[i])
 		}
 		port := port0 + i
-		addr := fmt.Sprintf(":%d", port) // e.g. ":30303"
+		addr := fmt.Sprintf(":%d", port) // e.g. ":30505"
 		name := common.MakeName("whisper-go", "2.0")
 		var peers []*discover.Node
 		if i > 0 {

@@ -17,8 +17,8 @@
 package les
 
 import (
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/p2p"
+	"github.com/hotelbyte/go-hotelbyte/metrics"
+	"github.com/hotelbyte/go-hotelbyte/p2p"
 )
 
 var (

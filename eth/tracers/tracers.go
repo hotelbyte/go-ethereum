@@ -21,7 +21,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/ethereum/go-ethereum/eth/tracers/internal/tracers"
+	"github.com/hotelbyte/go-hotelbyte/eth/tracers/internal/tracers"
 )
 
 // all contains all the built in JavaScript tracers by name.
@@ -36,7 +36,7 @@ func camel(str string) string {
 	return strings.Join(pieces, "")
 }
 
-// init retrieves the JavaScript transaction tracers included in go-ethereum.
+// init retrieves the JavaScript transaction tracers included in go-hotelbyte.
 func init() {
 	for _, file := range tracers.AssetNames() {
 		name := camel(strings.TrimSuffix(file, ".js"))

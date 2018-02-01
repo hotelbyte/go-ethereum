@@ -23,15 +23,15 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/consensus"
+	"github.com/hotelbyte/go-hotelbyte/core"
+	"github.com/hotelbyte/go-hotelbyte/core/types"
+	"github.com/hotelbyte/go-hotelbyte/ethdb"
+	"github.com/hotelbyte/go-hotelbyte/event"
+	"github.com/hotelbyte/go-hotelbyte/log"
+	"github.com/hotelbyte/go-hotelbyte/params"
+	"github.com/hotelbyte/go-hotelbyte/rlp"
 	"github.com/hashicorp/golang-lru"
 )
 
@@ -70,7 +70,7 @@ type LightChain struct {
 }
 
 // NewLightChain returns a fully initialised light chain using information
-// available in the database. It initialises the default Ethereum header
+// available in the database. It initialises the default Hotelbyte header
 // validator.
 func NewLightChain(odr OdrBackend, config *params.ChainConfig, engine consensus.Engine) (*LightChain, error) {
 	bodyCache, _ := lru.New(bodyCacheLimit)
@@ -174,25 +174,6 @@ func (self *LightChain) GasLimit() uint64 {
 	defer self.mu.RUnlock()
 
 	return self.hc.CurrentHeader().GasLimit
-}
-
-// LastBlockHash return the hash of the HEAD block.
-func (self *LightChain) LastBlockHash() common.Hash {
-	self.mu.RLock()
-	defer self.mu.RUnlock()
-
-	return self.hc.CurrentHeader().Hash()
-}
-
-// Status returns status information about the current chain such as the HEAD Td,
-// the HEAD hash and the hash of the genesis block.
-func (self *LightChain) Status() (td *big.Int, currentBlock common.Hash, genesisBlock common.Hash) {
-	self.mu.RLock()
-	defer self.mu.RUnlock()
-
-	header := self.hc.CurrentHeader()
-	hash := header.Hash()
-	return self.GetTd(hash, header.Number.Uint64()), hash, self.genesisBlock.Hash()
 }
 
 // Reset purges the entire blockchain, restoring it to its genesis state.
@@ -337,7 +318,7 @@ func (self *LightChain) postChainEvents(events []interface{}) {
 	for _, event := range events {
 		switch ev := event.(type) {
 		case core.ChainEvent:
-			if self.LastBlockHash() == ev.Hash {
+			if self.CurrentHeader().Hash() == ev.Hash {
 				self.chainHeadFeed.Send(core.ChainHeadEvent{Block: ev.Block})
 			}
 			self.chainFeed.Send(ev)
@@ -393,7 +374,7 @@ func (self *LightChain) InsertHeaderChain(chain []*types.Header, checkFreq int) 
 		return err
 	}
 	i, err := self.hc.InsertHeaderChain(chain, whFunc, start)
-	go self.postChainEvents(events)
+	self.postChainEvents(events)
 	return i, err
 }
 

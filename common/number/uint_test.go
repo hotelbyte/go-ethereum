@@ -20,7 +20,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/hotelbyte/go-hotelbyte/common"
 )
 
 func TestSet(t *testing.T) {

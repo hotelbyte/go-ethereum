@@ -25,9 +25,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/ethereum/go-ethereum/swarm"
-	"github.com/ethereum/go-ethereum/swarm/api"
+	"github.com/hotelbyte/go-hotelbyte/rpc"
+	"github.com/hotelbyte/go-hotelbyte/swarm"
+	"github.com/hotelbyte/go-hotelbyte/swarm/api"
 
 	"github.com/docker/docker/pkg/reexec"
 )

@@ -22,7 +22,7 @@ import (
 	mrand "math/rand"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/hotelbyte/go-hotelbyte/crypto"
 )
 
 func TestEnvelopeOpenAcceptsOnlyOneKeyTypeInFilter(t *testing.T) {
@@ -45,7 +45,7 @@ func TestEnvelopeOpenAcceptsOnlyOneKeyTypeInFilter(t *testing.T) {
 
 	mrand.Read(params.Payload)
 
-	msg, err := NewSentMessage(&params)
+	msg, err := newSentMessage(&params)
 	if err != nil {
 		t.Fatalf("failed to create new message with seed %d: %s.", seed, err)
 	}

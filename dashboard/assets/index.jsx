@@ -24,7 +24,7 @@ import createMuiTheme from 'material-ui/styles/createMuiTheme';
 
 import Dashboard from './components/Dashboard';
 
-const theme = createMuiTheme({
+const theme: Object = createMuiTheme({
     palette: {
         type: 'dark',
     },

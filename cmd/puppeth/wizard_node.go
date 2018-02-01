@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/hotelbyte/go-hotelbyte/accounts/keystore"
+	"github.com/hotelbyte/go-hotelbyte/common"
+	"github.com/hotelbyte/go-hotelbyte/log"
 )
 
 // deployNode creates a new node configuration based on some user input.
@@ -48,9 +48,9 @@ func (w *wizard) deployNode(boot bool) {
 	infos, err := checkNode(client, w.network, boot)
 	if err != nil {
 		if boot {
-			infos = &nodeInfos{portFull: 30303, peersTotal: 512, peersLight: 256}
+			infos = &nodeInfos{portFull: 30505, peersTotal: 512, peersLight: 256}
 		} else {
-			infos = &nodeInfos{portFull: 30303, peersTotal: 50, peersLight: 0, gasTarget: 4.7, gasPrice: 18}
+			infos = &nodeInfos{portFull: 30505, peersTotal: 50, peersLight: 0, gasTarget: 4.7, gasPrice: 18}
 		}
 	}
 	existed := err == nil
@@ -164,7 +164,7 @@ func (w *wizard) deployNode(boot bool) {
 		nocache = w.readDefaultString("n") != "n"
 	}
 	if out, err := deployNode(client, w.network, w.conf.bootFull, w.conf.bootLight, infos, nocache); err != nil {
-		log.Error("Failed to deploy Ethereum node container", "err", err)
+		log.Error("Failed to deploy Hotelbyte node container", "err", err)
 		if len(out) > 0 {
 			fmt.Printf("%s\n", out)
 		}
